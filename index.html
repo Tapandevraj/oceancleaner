@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ocean Plastic Bounty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar">
+    <span class="logo">🌊 OceanCleaner</span>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HOME ==================== -->
+  <header class="hero" id="home">
+    <h1>Clean the ocean.<br>Earn a living.</h1>
+    <p>Coastal fishermen get paid for every kilogram of plastic they pull out of the sea.</p>
+    <a class="hero-btn" href="#dashboard">Log a weigh-in</a>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path fill="#eef6f9" d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,40 L1440,80 L0,80 Z"></path>
+    </svg>
+  </header>
+
+  <main>
+
+    <!-- How it works -->
+    <section class="card">
+      <h2>How it works</h2>
+      <div class="three-col">
+        <div class="step"><span>1</span><h3>Collect</h3><p>Fishermen bring back plastic and nets caught during their trips.</p></div>
+        <div class="step"><span>2</span><h3>Weigh in</h3><p>The weight, boat ID and GPS location are recorded at the jetty.</p></div>
+        <div class="step"><span>3</span><h3>Get paid</h3><p>The bounty is calculated per kilogram and added to the fisherman's income.</p></div>
+      </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="card">
+      <h2>Bounty Calculator</h2>
+      <p class="sub">Check how much a fisherman can earn.</p>
+
+      <div class="two-col">
+        <div>
+          <label for="calcType">Type of plastic</label>
+          <select id="calcType">
+            <option value="Mixed plastic">Mixed plastic (₹25/kg)</option>
+            <option value="Hard plastic">Hard plastic (₹30/kg)</option>
+            <option value="PET bottles">PET bottles (₹35/kg)</option>
+            <option value="Fishing nets">Fishing nets (₹60/kg)</option>
+          </select>
+
+          <label for="calcWeight">Plastic weight per trip (kg)</label>
+          <input type="number" id="calcWeight" value="10" min="0">
+
+          <label for="calcTrips">Trips per month</label>
+          <input type="number" id="calcTrips" value="12" min="1">
+        </div>
+
+        <div class="result-box">
+          <p>Earned per trip</p>
+          <h3>₹<span id="calcTrip">0</span></h3>
+          <p>Monthly income</p>
+          <h3>₹<span id="calcMonth">0</span></h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <h2 class="section-title" id="dashboard">Dashboard</h2>
+
+    <!-- Stats cards -->
+    <section class="stats">
+      <div class="stat"><span id="stKg">0</span><small>kg plastic removed</small></div>
+      <div class="stat"><span id="stPay">₹0</span><small>paid to fishermen</small></div>
+      <div class="stat"><span id="stTrips">0</span><small>hauls logged</small></div>
+      <div class="stat"><span id="stFishers">0</span><small>fishermen earning</small></div>
+    </section>
+
+    <!-- Bars -->
+    <section class="card">
+      <h2>Plastic removed by type</h2>
+      <div id="bars"></div>
+    </section>
+
+    <!-- Weigh-in form -->
+    <section class="card">
+      <h2>Log a Weigh-in</h2>
+      <p class="sub">Fill this form when a boat comes back with plastic.</p>
+
+      <form id="logForm">
+        <div class="two-col">
+          <div>
+            <label for="name">Fisherman name</label>
+            <input type="text" id="name" placeholder="e.g. Ravi Kumar">
+          </div>
+          <div>
+            <label for="boat">Boat ID</label>
+            <input type="text" id="boat" placeholder="e.g. PB-1024">
+          </div>
+          <div>
+            <label for="type">Type of plastic</label>
+            <select id="type">
+              <option value="Mixed plastic">Mixed plastic (₹25/kg)</option>
+              <option value="Hard plastic">Hard plastic (₹30/kg)</option>
+              <option value="PET bottles">PET bottles (₹35/kg)</option>
+              <option value="Fishing nets">Fishing nets (₹60/kg)</option>
+            </select>
+          </div>
+          <div>
+            <label for="weight">Plastic weight (kg)</label>
+            <input type="number" id="weight" placeholder="e.g. 25" min="0">
+          </div>
+          <div>
+            <label for="lat">GPS Latitude</label>
+            <input type="number" id="lat" step="any" placeholder="e.g. 15.4989">
+          </div>
+          <div>
+            <label for="lon">GPS Longitude</label>
+            <input type="number" id="lon" step="any" placeholder="e.g. 73.8278">
+          </div>
+        </div>
+
+        <p id="message"></p>
+        <button type="submit" class="btn">Save Weigh-in</button>
+      </form>
+    </section>
+
+    <!-- Income of each fisherman -->
+    <section class="card">
+      <h2>Income of Each Fisherman</h2>
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Trips</th><th>Total kg</th><th>Total income</th></tr>
+          </thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- All records -->
+    <section class="card">
+      <h2>All Records</h2>
+
+      <div class="toolbar">
+        <input type="text" id="search" placeholder="Search by name or boat ID">
+        <select id="filterType">
+          <option value="All">All plastic types</option>
+          <option value="Mixed plastic">Mixed plastic</option>
+          <option value="Hard plastic">Hard plastic</option>
+          <option value="PET bottles">PET bottles</option>
+          <option value="Fishing nets">Fishing nets</option>
+        </select>
+        <button type="button" class="btn light" id="sampleBtn">Add sample data</button>
+        <button type="button" class="btn red" id="clearBtn">Clear all</button>
+      </div>
+
+      <p class="totals">Showing: <b><span id="totalKg">0</span> kg</b> &nbsp;|&nbsp;
+         Paid: <b>₹<span id="totalPay">0</span></b></p>
+
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Boat</th><th>Plastic</th><th>Kg</th><th>GPS</th><th>Earned</th><th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <h2 class="section-title" id="about">About the Project</h2>
+
+    <section class="card">
+      <h2>The problem</h2>
+      <p>Tonnes of plastic enter the ocean every year. Lost fishing nets and plastic waste harm fish, turtles and seabirds. At the same time, many coastal fishing families have a low and uncertain income.</p>
+    </section>
+
+    <section class="card">
+      <h2>Our solution</h2>
+      <p>This website lets fishermen earn a bounty for every kilogram of plastic they recover. Each weigh-in is recorded with the fisherman's name, boat ID, plastic weight and GPS position, so the payout is transparent and the cleaned areas can be tracked.</p>
+    </section>
+
+    <section class="card">
+      <h2>Bounty rates</h2>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Plastic type</th><th>Rate</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Mixed plastic</td><td>₹25 / kg</td><td>Bags, wrappers and general waste</td></tr>
+            <tr><td>Hard plastic</td><td>₹30 / kg</td><td>Crates, drums and containers</td></tr>
+            <tr><td>PET bottles</td><td>₹35 / kg</td><td>Easy to recycle</td></tr>
+            <tr><td>Fishing nets</td><td>₹60 / kg</td><td>Ghost nets are the most harmful to marine life</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Technologies used</h2>
+      <div class="three-col">
+        <div class="step"><h3>HTML</h3><p>Structure of the page, forms and tables.</p></div>
+        <div class="step"><h3>CSS</h3><p>Colors, layout, navigation bar and mobile design.</p></div>
+        <div class="step"><h3>JavaScript</h3><p>Calculator, form checks, search, filter and saving data in the browser.</p></div>
+      </div>
+    </section>
+
+    <!-- Our team (emails yahan badalna hai) -->
+    <section class="card">
+      <h2>Our team</h2>
+      <div class="three-col">
+
+        <div class="step">
+          <h3>Tapan Dev Raj</h3>
+          <p>Team Leader</p>
+          <p>Reg. No: 12622012</p>
+          <p><a href="mailto:tapandevraj56@gmail.com">tapandevraj56@gmail.com</a></p>
+        </div>
+
+        <div class="step">
+          <h3>Ankur Kumar</h3>
+          <p>Team Member</p>
+          <p>Reg. No: 12621851</p>
+          <p><a href="mailto:ankur@gmail.com">ankur@gmail.com</a></p>
+        </div>
+
+        <div class="step">
+          <h3>Krishna Kunal</h3>
+          <p>Team Member</p>
+          <p>Reg. No: 12622465</p>
+          <p><a href="mailto:krishnakunal974@gmail.com">krishnakunal974@gmail.com</a></p>
+        </div>
+
+      </div>
+      <p class="sub">Course: CSE326 · Lovely Professional University</p>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <h2 class="section-title" id="contact">Contact and Agencies</h2>
+
+    <section class="card">
+      <h2>Important agencies</h2>
+      <p class="sub">Please verify these details on the official websites before using them.</p>
+
+      <div class="agency-grid">
+        <div class="agency">
+          <h3>Indian Coast Guard</h3>
+          <p>Sea emergencies and oil or plastic spill reports.</p>
+          <p><b>Toll-free:</b> 1554</p>
+          <p><b>Website:</b> indiancoastguard.gov.in</p>
+        </div>
+        <div class="agency">
+          <h3>Ministry of Environment, Forest and Climate Change</h3>
+          <p>National policy on pollution and coastal protection.</p>
+          <p><b>Website:</b> moef.gov.in</p>
+        </div>
+        <div class="agency">
+          <h3>Central Pollution Control Board (CPCB)</h3>
+          <p>Pollution monitoring and complaints.</p>
+          <p><b>Website:</b> cpcb.nic.in</p>
+        </div>
+        <div class="agency">
+          <h3>National Fisheries Development Board</h3>
+          <p>Support schemes for fishermen and fishing communities.</p>
+          <p><b>Website:</b> nfdb.gov.in</p>
+        </div>
+        <div class="agency">
+          <h3>State Pollution Control Board</h3>
+          <p>Report local pollution. Search for your own state's board.</p>
+        </div>
+        <div class="agency">
+          <h3>National Emergency Number</h3>
+          <p>Police, fire and ambulance for any emergency.</p>
+          <p><b>Call:</b> 112</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Send us a message</h2>
+      <form id="contactForm">
+        <label for="cName">Your name</label>
+        <input type="text" id="cName" placeholder="e.g. Ravi Kumar">
+
+        <label for="cEmail">Email</label>
+        <input type="email" id="cEmail" placeholder="e.g. ravi@example.com">
+
+        <label for="cMsg">Message</label>
+        <textarea id="cMsg" rows="4" placeholder="Write your message here"></textarea>
+
+        <p id="cNote"></p>
+        <button type="submit" class="btn">Send message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>CSE326 CA1 Project – Ocean Plastic Pollution Bounty and Coastal Community Income Project</footer>
+
+  <script src="script.js"></script>
+</body>

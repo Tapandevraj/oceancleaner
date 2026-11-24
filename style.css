@@ -1,0 +1,411 @@
+/* Ocean Plastic Bounty - single page styles */
+
+:root {
+  --dark: #08334a;
+  --blue: #0b6e8f;
+  --light: #d9eef5;
+  --page: #eef6f9;
+  --orange: #ff7a1a;
+  --red: #c0392b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;   /* link click pe smooth scroll */
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background: var(--page);
+  color: #123;
+}
+
+/* ---------- Navigation ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 6%;
+  background: var(--dark);
+  color: white;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+  opacity: 0.85;
+}
+
+.links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 70px 6% 120px;
+  background: linear-gradient(160deg, var(--dark), var(--blue));
+}
+
+.hero h1 {
+  margin: 0 0 15px;
+  font-size: 44px;
+  line-height: 1.2;
+}
+
+.hero p {
+  max-width: 520px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--orange);
+  color: #1a0a00;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+}
+
+.wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+}
+
+/* ---------- Layout ---------- */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 15px 20px;
+}
+
+/* Section ka bada heading (Dashboard, About, Contact) */
+.section-title {
+  margin: 50px 0 20px;
+  padding-bottom: 8px;
+  font-size: 30px;
+  color: var(--dark);
+  border-bottom: 3px solid var(--orange);
+  scroll-margin-top: 70px;   /* navbar ke neeche chhup na jaye */
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  border-top: 5px solid var(--blue);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  color: var(--dark);
+}
+
+.sub {
+  margin: 0 0 15px;
+  color: #567;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* ---------- Steps / info boxes ---------- */
+.step {
+  background: var(--page);
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.step span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background: var(--orange);
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.step h3 {
+  margin: 8px 0 5px;
+  color: var(--dark);
+}
+
+.step p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ---------- Agencies ---------- */
+.agency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.agency {
+  background: var(--page);
+  padding: 18px;
+  border-left: 5px solid var(--blue);
+  border-radius: 8px;
+}
+
+.agency h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  color: var(--dark);
+}
+
+.agency p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* ---------- Stats cards ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat {
+  background: white;
+  padding: 18px 10px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.stat span {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.stat small {
+  color: #567;
+}
+
+/* ---------- Bars ---------- */
+.bar-row {
+  margin-bottom: 12px;
+}
+
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.bar-back {
+  height: 14px;
+  background: var(--light);
+  border-radius: 7px;
+}
+
+.bar-fill {
+  height: 14px;
+  background: var(--blue);
+  border-radius: 7px;
+}
+
+/* ---------- Forms ---------- */
+label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  margin-top: 5px;
+  border: 1.5px solid #b9cdd5;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background: white;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+#message, #cNote {
+  font-weight: 600;
+  min-height: 22px;
+  color: var(--red);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  padding: 11px 24px;
+  background: var(--orange);
+  color: #1a0a00;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(0.92);
+}
+
+.btn.light {
+  background: var(--light);
+  color: var(--dark);
+}
+
+.btn.red {
+  background: var(--red);
+  color: white;
+}
+
+/* ---------- Calculator result ---------- */
+.result-box {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.result-box p {
+  margin: 0;
+  color: #345;
+}
+
+.result-box h3 {
+  margin: 4px 0 18px;
+  font-size: 34px;
+  color: var(--blue);
+}
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.toolbar input,
+.toolbar select {
+  flex: 1;
+  min-width: 170px;
+  margin-top: 0;
+}
+
+.totals {
+  margin: 10px 0;
+}
+
+/* ---------- Tables ---------- */
+.table-box {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #dde7ea;
+}
+
+th {
+  background: var(--light);
+  color: var(--dark);
+}
+
+tr:hover td {
+  background: #f4fafc;
+}
+
+.empty {
+  text-align: center;
+  color: #789;
+  padding: 20px;
+}
+
+.delete-btn {
+  padding: 5px 12px;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  background: var(--dark);
+  color: #b9d3dc;
+  font-size: 14px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .two-col, .three-col, .agency-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .links a {
+    margin-left: 0;
+    margin-right: 14px;
+  }
+}
